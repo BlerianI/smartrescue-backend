@@ -1,0 +1,38 @@
+{
+  "name": "smartrescue-backend",
+  "version": "1.0.0",
+  "description": "Diplomarbeit von Majd Alshikh, Pawel Otreba, Blerian Istrefi",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlerianI/smartrescue-backend.git"
+  },
+  "keywords": [],
+  "author": "BlerianDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlerianI/smartrescue-backend/issues"
+  },
+  "homepage": "https://github.com/BlerianI/smartrescue-backend#readme",
+  "dependencies": {
+    "@prisma/client": "^6.16.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "prisma": "^6.16.3"
+  }
+}
