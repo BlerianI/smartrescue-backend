@@ -6,7 +6,7 @@ WORKDIR /app
 
 # package.json & package-lock.json kopieren
 # npx run prisma generate kann fehlschlagen, wenn das schema noch nicht drinnen ist deshalb hier und nicht dann bei copy ..
-COPY COPY package*.json prisma ./
+COPY package*.json prisma ./
 
 # Dependencies installieren
 RUN npm install
