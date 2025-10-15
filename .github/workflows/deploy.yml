@@ -23,7 +23,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "app.tar"
+          source: "${{ github.workspace }}/app.tar"
           target: "/tmp"
 
       # 🔹 Erstelle .env auf Server (mit ssh-action)
