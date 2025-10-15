@@ -1,0 +1,60 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t app .
+
+      - name: Save image
+        run: docker save app -o app.tar
+
+      # 🔹 NEU: .env auf Server kopieren
+      - name: Copy .env to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: ""
+          target: "/tmp/.env"
+          # Wir schreiben den Inhalt direkt per echo (sicherer)
+        env:
+          ENV_CONTENT: ${{ secrets.ENV_FILE }}
+        run: |
+          mkdir -p /tmp
+          echo "$ENV_CONTENT" > /tmp/.env
+
+      - name: Copy app.tar to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "app.tar"
+          target: "/tmp"
+
+      - name: Run on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /tmp
+            docker load -i app.tar
+            docker stop app 2>/dev/null || true
+            docker rm app 2>/dev/null || true
+            docker run -d \
+              --name app \
+              --env-file .env \
+              -p 3000:3000 \
+              --restart unless-stopped \
+              app
