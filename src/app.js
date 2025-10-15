@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
+import config from './config.js'
 
 import adminRoute from './api/admin/adminRoutes.js';
 import emergencyRoute from './api/emergency/emergencyRoutes.js';
@@ -11,7 +12,9 @@ const dirname = path.resolve();
 
 const app = express();
 
-app.use(morgan('dev'));
+if (config.api.env === 'development') {
+  app.use(morgan('dev'));
+}
 app.use(cors())
 
 app.use(express.static(path.join(dirname, '/public')));
