@@ -1,7 +1,0 @@
-node_modules
-.env
-Dockerfile
-.dockerignore
-
-# verhinderung, dass das git-repo ins image gelangt 
-.git
