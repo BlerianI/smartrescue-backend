@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 import config from '../config.js';
 import { randomUUID } from 'crypto';
 
+// JWT Login
+
 export const createUser = async ({ lastName, firstName, email, password }) => {
   const existingUser = await prisma.users.findUnique({
     where: { email }
@@ -97,4 +99,31 @@ export const loginUser = async ({ email, password }) => {
     }, 
     token
   }
+}
+
+// OAuth
+
+export const handleOAuthLogin = async (user) => {
+  const token = jwt.sign(
+    {
+      userId: user.user_id,
+      email: user.email,
+      role: user.role,
+    },
+    config.jwt.secret,
+    { expiresIn: config.jwt.expiresIn },
+  );
+
+  return {
+    user: {
+      user_id: user.user_id,
+      email: user.email,
+      last_name: user.last_name,
+      first_name: user.first_name,
+      role: user.role,
+      is_active: user.is_active,
+      avatar_url: user.avatar_url,
+    },
+    token,
+  };
 }

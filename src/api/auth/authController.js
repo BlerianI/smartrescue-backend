@@ -44,3 +44,26 @@ export const signIn = asyncHandler(async (req, res) => {
     }
   });
 }); 
+
+export const googleCallback = asyncHandler(async (req, res) => {
+  const result = await model.handleOAuthLogin(req.user); 
+
+  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+  res.redirect(`${frontendUrl}/auth/callback?token=${result.token}`);
+}); 
+
+export const logout = asyncHandler(async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Erfolgreich abgemeldet',
+  });
+})
+
+export const getCurrentUser = asyncHandler(async (req, res) => {
+  res.status(200).json({
+    success: true,
+    data: {
+      user: req.user,
+    },
+  });
+});
