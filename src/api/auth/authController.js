@@ -46,10 +46,10 @@ export const signIn = asyncHandler(async (req, res) => {
 }); 
 
 export const googleCallback = asyncHandler(async (req, res) => {
-  const result = await model.handleOAuthLogin(req.user); 
+  //const result = await model.handleOAuthLogin(req.user); 
 
   const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-  res.redirect(`${frontendUrl}/auth/callback?token=${result.token}`);
+  res.redirect(`${frontendUrl}/profile`);
 }); 
 
 export const logout = asyncHandler(async (req, res) => {
