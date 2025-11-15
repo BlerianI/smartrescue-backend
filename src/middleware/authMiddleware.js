@@ -1,11 +1,10 @@
 /* eslint-disable */
-import jwt from 'jsonwebtoken';
 import config from '../config.js';
 import prisma from '../prisma.js';
+import { verifyAccessToken } from '../utils/tokenUtils.js';
 
 export const authenticateToken = async (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  const token = req.cookies[config.cookies.accessTokenName];
 
   if (!token) {
     return res.status(401).json({
@@ -15,9 +14,15 @@ export const authenticateToken = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, config.jwt.secret);
+    const decoded = verifyAccessToken(token);
 
-    // Optional: Prüfe ob User noch existiert und aktiv ist
+    if (decoded.type !== 'access') {
+      return res.status(403).json({
+        success: false,
+        message: 'Falscher Token-Typ',
+      });
+    }
+
     const user = await prisma.users.findUnique({
       where: { user_id: decoded.userId },
       select: {

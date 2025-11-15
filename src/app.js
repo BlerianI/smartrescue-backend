@@ -4,6 +4,7 @@ import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
 import config from './config.js';
+import cookieParser from 'cookie-parser';
 
 import adminRoute from './api/admin/adminRoutes.js';
 import emergencyRoute from './api/emergency/emergencyRoutes.js';
@@ -17,8 +18,15 @@ const app = express();
 if (config.api.env === 'development') {
   app.use(morgan('dev'));
 }
-app.use(cors());
 
+app.use(
+  cors({
+    origin: config.frontend.url,
+    credentials: true,
+  }),
+);
+
+app.use(cookieParser());
 app.use(express.static(path.join(dirname, '/public')));
 app.use(express.json());
 

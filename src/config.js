@@ -11,8 +11,21 @@ const config = {
     dbUrl: process.env.DATABASE_URL,
   },
   jwt: {
-    secret: process.env.JWT_SECRET || 'your-secret-key-change-in-production',
-    expiresIn: process.env.JWT_EXPIRES_IN || '7d',
+    accessSecret: process.env.JWT_ACCESS_SECRET || 'access-secret-change-me',
+    refreshSecret: process.env.JWT_REFRESH_SECRET || 'refresh-secret-change-me',
+    accessExpiresIn: '15m',
+    refreshExpiresIn: '7d',
+  },
+  cookies: {
+    accessTokenName: 'accessToken',
+    refreshTokenName: 'refreshToken',
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+    maxAge: {
+      access: 15 * 60 * 1000,
+      refresh: 7 * 24 * 60 * 60 * 1000,
+    },
   },
   oauth: {
     google: {
@@ -20,6 +33,9 @@ const config = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackUrl: process.env.GOOGLE_CALLBACK_URL || '/api/v1/auth/google/callback',
     },
+  },
+  frontend: {
+    url: process.env.FRONTEND_URL || 'http://localhost:9000',
   },
 };
 
