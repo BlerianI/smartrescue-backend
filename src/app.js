@@ -26,6 +26,8 @@ app.use(
   }),
 );
 
+app.set('trust proxy', 1);
+
 app.use(cookieParser());
 app.use(express.static(path.join(dirname, '/public')));
 app.use(express.json());
