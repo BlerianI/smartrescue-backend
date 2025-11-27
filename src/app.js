@@ -21,7 +21,7 @@ if (config.api.env === 'development') {
 
 app.use(
   cors({
-    origin: ['https://localhost:9000', 'http://localhost:9000'],
+    origin: ['https://localhost:9000', 'https://192.168.0.31:9000'],
     credentials: true,
   }),
 );
