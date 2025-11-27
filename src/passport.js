@@ -1,3 +1,4 @@
+// src/passport.js
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import config from './config.js';
@@ -23,13 +24,14 @@ passport.use(
         });
 
         if (!user) {
+
           user = await prisma.users.create({
             data: {
               user_id: randomUUID(),
               email: googleEmail,
               first_name: googleFirstName,
               last_name: googleLastName,
-              password: '', 
+              password: '',
               last_login: new Date(),
               role: 'user',
               is_active: true,
@@ -37,6 +39,17 @@ passport.use(
             },
           });
         } else {
+
+          if (user.password && user.password !== '') {
+
+            return done(
+              new Error(
+                'Dieser Account wurde mit E-Mail/Passwort erstellt. Bitte melde dich mit deinen Zugangsdaten an.',
+              ),
+              null,
+            );
+          }
+
           user = await prisma.users.update({
             where: { user_id: user.user_id },
             data: {
