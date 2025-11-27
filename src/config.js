@@ -20,8 +20,9 @@ const config = {
     accessTokenName: 'accessToken',
     refreshTokenName: 'refreshToken',
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    secure: true, // Immer true, weil beide HTTPS verwenden
+    sameSite: 'none', // MUSS 'none' sein für Cross-Origin!
+    domain: process.env.NODE_ENV === 'production' ? '.ondigitalocean.app' : undefined,
     maxAge: {
       access: 15 * 60 * 1000,
       refresh: 7 * 24 * 60 * 60 * 1000,
@@ -31,7 +32,11 @@ const config = {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackUrl: process.env.GOOGLE_CALLBACK_URL || '/api/v1/auth/google/callback',
+      callbackUrl:
+        process.env.GOOGLE_CALLBACK_URL ||
+        (process.env.NODE_ENV === 'production'
+          ? 'https://sm-api-eb6z6.ondigitalocean.app/api/v1/auth/google/callback'
+          : 'http://localhost:3000/api/v1/auth/google/callback'),
     },
   },
   frontend: {
