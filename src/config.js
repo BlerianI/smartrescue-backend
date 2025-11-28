@@ -20,8 +20,8 @@ const config = {
     accessTokenName: 'accessToken',
     refreshTokenName: 'refreshToken',
     httpOnly: true,
-    secure: true, // Immer true, weil beide HTTPS verwenden
-    sameSite: 'none', // MUSS 'none' sein für Cross-Origin!
+    secure: true, 
+    sameSite: 'none',
     domain: undefined,
     maxAge: {
       access: 15 * 60 * 1000,
