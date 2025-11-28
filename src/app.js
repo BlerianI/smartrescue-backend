@@ -19,10 +19,27 @@ if (config.api.env === 'development') {
   app.use(morgan('dev'));
 }
 
+const allowedOrigins = [
+  'https://192.168.0.31:9000',
+  'https://localhost:9000',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: ['https://localhost:9000', 'https://192.168.0.31:9000'],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log('❌ CORS blockiert für:', origin);
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 );
 

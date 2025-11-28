@@ -22,7 +22,7 @@ const config = {
     httpOnly: true,
     secure: true, // Immer true, weil beide HTTPS verwenden
     sameSite: 'none', // MUSS 'none' sein für Cross-Origin!
-    domain: process.env.NODE_ENV === 'production' ? '.ondigitalocean.app' : undefined,
+    domain: undefined,
     maxAge: {
       access: 15 * 60 * 1000,
       refresh: 7 * 24 * 60 * 60 * 1000,
