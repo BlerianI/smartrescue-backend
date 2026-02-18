@@ -10,6 +10,7 @@ import adminRoute from './api/admin/adminRoutes.js';
 import emergencyRoute from './api/emergency/emergencyRoutes.js';
 import userRoute from './api/user/userRoutes.js';
 import authRoute from './api/auth/authRoutes.js';
+import pdfRoute from './api/pdf/pdfRoute.js';
 
 const dirname = path.resolve();
 
@@ -49,12 +50,15 @@ app.set('trust proxy', 1);
 
 app.use(cookieParser());
 app.use(express.static(path.join(dirname, '/public')));
-app.use(express.json());
+//GEÄNDERT FÜr PROFILBILD
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.use('/api/v1/admin', adminRoute);
 app.use('/api/v1/emergency', emergencyRoute);
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/pdf', pdfRoute);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

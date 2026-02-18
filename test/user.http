@@ -1,0 +1,101 @@
+###
+GET http://localhost:3000/api/v1/user/
+
+###
+GET http://localhost:3000/api/v1/user/profiles/dd3c1e27-c077-4a67-b54d-1347d2197e85
+
+###
+POST http://localhost:3000/api/v1/user/profiles/dd3c1e27-c077-4a67-b54d-1347d2197e85
+Content-Type: application/json
+
+{
+  "first_name": "Test2",
+  "last_name": "Test",
+  "birthdate": "1995-08-22",
+  "gender": "Female",
+  "street": "Linzerstraße",
+  "housenumber": "15",
+  "postalcode": "1150",
+  "city": "Wien",
+  "weight": "62",
+  "height": "168",
+  "bloodtype": "B+",
+  "avatar_url": "https://i.pravatar.cc/150?img=47"
+}
+###
+POST http://localhost:3000/api/v1/user/doctor/5b74797d-f691-47f1-a85b-b0fab5c93b94
+Content-Type: application/json
+
+{
+  "first_name": "huen",
+  "last_name": "sohn",
+  "street": "Linzerstraße",
+  "city": "Wien",
+  "housenumber": "15",
+  "postalcode": "1150",
+  "specialty": "Cardiology",
+  "phone_number": "0123456789",
+  "title": "Dr."
+}
+###
+POST http://localhost:3000/api/v1/user/emergency_contacts/babed8f0-05b1-4aab-9702-af5136561d84
+Content-Type: application/json
+
+{
+  "first_name": "Maria",
+  "last_name": "Müller",
+  "phone_number": "0987654321",
+  "relationship": "Mama",
+  "priority": 1,
+  "note": "Im Notfall bitte sofort benachrichtigen."
+}
+###
+POST http://localhost:3000/api/v1/user/meddata/8005d197-59de-4601-95d2-e060f0b3044d
+Content-Type: application/json
+
+{
+  "key_info": "Diabetes Typ 2"
+}
+###
+POST http://localhost:3000/api/v1/user/medications/abb96eac-497d-4ae6-8109-9d2e2c2b87e1
+Content-Type: application/json
+
+{
+  "med_name": "Metformin",
+  "dosage": "500mg",
+  "frequency": "2 times a day",
+  "note": "Nach dem Essen einnehmen"
+}
+###
+POST http://localhost:3000/api/v1/user/med_conditions/2ab6981e-cf1d-4bd7-bb9d-44c653797621
+Content-Type: application/json
+
+{
+  "condition_name": "Diabetes Typ 2",
+  "note": "Diabetes Typ 2",
+  "diagnosed_since": "2020-01-01"
+}
+###
+POST http://localhost:3000/api/v1/user/allergies/2ab6981e-cf1d-4bd7-bb9d-44c653797621
+Content-Type: application/json
+
+{
+  "allergy_name": "Diabetes Typ 2",
+  "note": "Diabetes Typ 2"
+}
+###
+POST http://localhost:3000/api/v1/user/documents/fe3865c8-efdb-4637-b3d0-620c65c4e7b0
+Content-Type: application/json
+
+{
+  "document_title": "Diabetes Typ 2",
+  "document_url": "https://example.com/diabetes_typ2",
+  "uploaded_at": "2023-10-01"
+}
+
+###
+DELETE http://localhost:3000/api/v1/user/profiles/75644fd8-78ee-499d-b987-6cdbb308387b
+
+
+###
+GET http://localhost:3000/api/v1/user/pdf/660e8400-e29b-41d4-a716-446655440001
