@@ -17,6 +17,7 @@ export const getProfilesFromUser = asyncHandler(async (req, res) => {
     });
   }
 });
+// #region Inserts
 export const insertProfile = asyncHandler(async (req, res) => {
   const user_id = req.params.id;
   const {
@@ -191,12 +192,38 @@ export const insertDocuments = asyncHandler(async (req, res) => {
     });
   }
 });
+// #endregion
+
+// #region Deletes
 export const deleteProfileFromUser = asyncHandler(async (req, res) => {
   try {
     const profile_id = req.params.id;
     res.status(200).json(await model.deleteProfileFromUser(profile_id));
   } catch (error) {
     console.error('Fehler beim Löschen des Profils:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+// #endregion
+
+// #endregion
+
+// #region Selects
+export const getProfileDetails = asyncHandler(async (req, res) => {
+  try {
+    const profile_id = req.params.id;
+    const profileData = await model.getProfileDetails(profile_id);
+
+    if (!profileData) {
+      return res.status(404).json({ error: 'Profil nicht gefunden' });
+    }
+
+    res.status(200).json(profileData);
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Profildetails:', error);
     res.status(500).json({
       error: 'Serverfehler',
       message: error.message,
@@ -216,3 +243,223 @@ export const getProfilePdf = asyncHandler(async (req, res) => {
     });
   }
 });
+// #endregion
+
+// #region Updates
+
+// export const updateUser = asyncHandler(async (req, res) => {
+//   try {
+//     const user_id = req.params.id;
+//     const {
+//       last_login,
+//       username,
+//       email,
+//       password,
+//       birthdate,
+//       role,
+//       is_active,
+//       avatar_url,
+//     } = req.body;
+//     res.status(200).json(
+//       await model.updateUser(
+//         user_id,
+//         last_login,
+//         username,
+//         email,
+//         password,
+//         birthdate,
+//         role,
+//         is_active,
+//         avatar_url,
+//       ),
+//     );
+//   } catch (error) {
+//     console.error('Fehler beim Aktualisieren des Users:', error);
+//     res.status(500).json({
+//       error: 'Serverfehler',
+//       message: error.message,
+//     });
+//   }
+// });
+
+export const updateProfile = asyncHandler(async (req, res) => {
+  try {
+    const profile_id = req.params.id;
+    const {
+      gender,
+      birthdate,
+      last_name,
+      first_name,
+      height,
+      weight,
+      avatar_url,
+      blood_type,
+      street,
+      city,
+      house_number,
+      postal_code,
+    } = req.body;
+    res.status(200).json(
+      await model.updateProfile(
+        profile_id,
+        gender,
+        birthdate,
+        last_name,
+        first_name,
+        height,
+        weight,
+        avatar_url,
+        blood_type,
+        street,
+        city,
+        house_number,
+        postal_code,
+      ),
+    );
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren des Profils:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+
+export const updateEmergencyContact = asyncHandler(async (req, res) => {
+  try {
+    const contact_id = req.params.id;
+    const { first_name, last_name, phone_number, relationship, priority, note } = req.body;
+    res.status(200).json(
+      await model.updateEmergencyContact(
+        contact_id,
+        first_name,
+        last_name,
+        phone_number,
+        relationship,
+        priority,
+        note,
+      ),
+    );
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren des Notfallkontakts:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+
+export const updateDoctor = asyncHandler(async (req, res) => {
+  try {
+    const doctor_id = req.params.id;
+    const {
+      first_name,
+      last_name,
+      street,
+      city,
+      house_number,
+      postal_code,
+      specialty,
+      phone_number,
+      title,
+    } = req.body;
+    res.status(200).json(
+      await model.updateDoctor(
+        doctor_id,
+        first_name,
+        last_name,
+        street,
+        city,
+        house_number,
+        postal_code,
+        specialty,
+        phone_number,
+        title,
+      ),
+    );
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren des Arztes:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+
+export const updateMedData = asyncHandler(async (req, res) => {
+  try {
+    const med_id = req.params.id;
+    const { key_info } = req.body;
+    res.status(200).json(await model.updateMedData(med_id, key_info));
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren der medizinischen Daten:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+
+export const updateMedications = asyncHandler(async (req, res) => {
+  try {
+    const medication_id = req.params.id;
+    const { med_name, dosage, frequency, note } = req.body;
+    res.status(200).json(
+      await model.updateMedications(medication_id, med_name, dosage, frequency, note),
+    );
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren der Medikamente:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+
+export const updateMedConditions = asyncHandler(async (req, res) => {
+  try {
+    const condition_id = req.params.id;
+    const { condition_name, note, diagnosed_since } = req.body;
+    res.status(200).json(
+      await model.updateMedConditions(condition_id, condition_name, note, diagnosed_since),
+    );
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren der Erkrankungen:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+
+export const updateAllergies = asyncHandler(async (req, res) => {
+  try {
+    const allergy_id = req.params.id;
+    const { allergy_name, note } = req.body;
+    res.status(200).json(await model.updateAllergies(allergy_id, allergy_name, note));
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren der Allergien:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+
+export const updateDocuments = asyncHandler(async (req, res) => {
+  try {
+    const document_id = req.params.id;
+    const { document_title, document_url, uploaded_at } = req.body;
+    res.status(200).json(
+      await model.updateDocuments(document_id, document_title, document_url, uploaded_at),
+    );
+  } catch (error) {
+    console.error('Fehler beim Aktualisieren der Dokumente:', error);
+    res.status(500).json({
+      error: 'Serverfehler',
+      message: error.message,
+    });
+  }
+});
+
+// #endregion

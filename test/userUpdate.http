@@ -1,0 +1,96 @@
+
+### Update Profile
+PATCH http://localhost:3000/api/v1/user/profiles/73dd923c-167f-4d46-a98f-35328d480ade
+Content-Type: application/json
+
+{
+  "first_name": "UpdatedFirst",
+  "last_name": "UpdatedLast",
+  "birthdate": "1995-08-22",
+  "gender": "Female",
+  "street": "UpdatedStreet",
+  "housenumber": "20",
+  "postalcode": "1234",
+  "city": "UpdatedCity",
+  "weight": "65",
+  "height": "170",
+  "bloodtype": "A+",
+  "avatar_url": "https://example.com/new_avatar.png"
+}
+
+### Update Emergency Contact
+PATCH http://localhost:3000/api/v1/user/emergency_contacts/a2de7aaa-55d0-445a-bf32-886b30744066
+Content-Type: application/json
+
+{
+  "first_name": "UpdatedContactFirst",
+  "last_name": "UpdatedContactLast",
+  "phone_number": "1122334455",
+  "relationship": "Father",
+  "priority": 2,
+  "note": "Updated note"
+}
+
+### Update Doctor
+PATCH http://localhost:3000/api/v1/user/doctor/f6b6a5e7-ff27-4a2b-968a-421aefdf028f
+Content-Type: application/json
+
+{
+  "first_name": "Dr. Updated",
+  "last_name": "UpdatedLast",
+  "street": "UpdatedStreet",
+  "city": "UpdatedCity",
+  "housenumber": "20",
+  "postalcode": "1234",
+  "specialty": "Neurology",
+  "phone_number": "9988776655",
+  "title": "Prof."
+}
+
+### Update Medical Data (Key Info only)
+PATCH http://localhost:3000/api/v1/user/meddata/e1daa322-234f-4285-ae2d-34d2134c8be8
+Content-Type: application/json
+
+{
+  "key_info": "Updated critical info"
+}
+
+### Update Medication
+PATCH http://localhost:3000/api/v1/user/medications/625ddef7-3879-4257-88aa-48df5e3589db
+Content-Type: application/json
+
+{
+  "med_name": "UpdatedMed",
+  "dosage": "1000mg",
+  "frequency": "Once a day",
+  "note": "Updated note"
+}
+
+### Update Medical Condition
+PATCH http://localhost:3000/api/v1/user/med_conditions/f58f49a2-f900-48d1-a9e3-941df8d3363a
+Content-Type: application/json
+
+{
+  "condition_name": "Updated Condition",
+  "note": "Updated note",
+  "diagnosed_since": "2021-01-01"
+}
+
+### Update Allergy
+PATCH http://localhost:3000/api/v1/user/allergies/f624733c-b7b0-4a71-a129-dbf02b8e20a6
+Content-Type: application/json
+
+{
+  "allergy_name": "Updated Allergy",
+  "note": "Updated note"
+}
+
+### Update Document
+PATCH http://localhost:3000/api/v1/user/documents/ee0e8400-e29b-41d4-a716-446655440017
+Content-Type: application/json
+
+{
+  "document_title": "Updated Title",
+  "document_url": "https://example.com/updated_doc",
+  "uploaded_at": "2023-12-01T12:00:00.000Z"
+}
