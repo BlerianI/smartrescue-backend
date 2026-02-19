@@ -1,15 +1,12 @@
 import * as model from '../../models/userModel.js';
 import asyncHandler from 'express-async-handler';
-<<<<<<< HEAD
-=======
 import { uploadProfilePicture } from '../../bucket/storageService.js';
->>>>>>> develop
 
 export const getTest = asyncHandler(async (req, res) => {
   res.status(200).json(await model.getTest());
 });
 
-<<<<<<< HEAD
+
 export const getProfilesFromUser = asyncHandler(async (req, res) => {
   try {
     const user_id = req.params.id;
@@ -468,7 +465,6 @@ export const updateDocuments = asyncHandler(async (req, res) => {
 });
 
 // #endregion
-=======
 export const uploadAvatar = asyncHandler(async (req, res) => {
   if (!req.file) {
     return res.status(400).json({
@@ -487,4 +483,3 @@ export const uploadAvatar = asyncHandler(async (req, res) => {
     data: { imageUrl },
   });
 });
->>>>>>> develop

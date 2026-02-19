@@ -37,12 +37,9 @@
     "nodemon": "^3.1.10",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
-<<<<<<< HEAD
     "pdfkit": "^0.17.2",
     "sodium-native": "^5.0.10",
-=======
     "uuid": "^13.0.0",
->>>>>>> develop
     "zod": "^4.1.12"
   },
   "devDependencies": {

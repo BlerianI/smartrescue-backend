@@ -1,5 +1,5 @@
 import express from 'express';
-<<<<<<< HEAD
+
 import {
   getTest,
   getProfilesFromUser,
@@ -48,11 +48,10 @@ router.patch('/medications/:id', updateMedications);
 router.patch('/med_conditions/:id', updateMedConditions);
 router.patch('/allergies/:id', updateAllergies);
 router.patch('/documents/:id', updateDocuments);
-=======
-import multer from 'multer';
-import { getTest, uploadAvatar } from './userController.js';
 
-const router = express.Router();
+import multer from 'multer';
+import { uploadAvatar } from './userController.js';
+
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -65,6 +64,5 @@ const upload = multer({
 
 router.get('/', getTest);
 router.post('/upload-avatar', upload.single('avatar'), uploadAvatar);
->>>>>>> develop
 
 export default router;
