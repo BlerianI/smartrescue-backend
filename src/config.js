@@ -20,8 +20,8 @@ const config = {
     accessTokenName: 'accessToken',
     refreshTokenName: 'refreshToken',
     httpOnly: true,
-    secure: true, 
-    sameSite: 'none',
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     domain: undefined,
     maxAge: {
       access: 15 * 60 * 1000,
@@ -33,11 +33,16 @@ const config = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackUrl:
-        process.env.GOOGLE_CALLBACK_URL ||
-        (process.env.NODE_ENV === 'production'
-          ? 'https://sm-api-eb6z6.ondigitalocean.app/api/v1/auth/google/callback'
-          : 'http://localhost:3000/api/v1/auth/google/callback'),
+        process.env.GOOGLE_CALLBACK_URL || 'http://localhost:3000/api/v1/auth/google/callback',
     },
+  },
+  spaceBucket: {
+    spaceEndpoint: process.env.DO_SPACE_ENPOINT,
+    spaceRegion: process.env.DO_SPACE_REGION,
+    spaceAccessKeyId: process.env.DO_SPACE_ACCESS_KEY_ID,
+    forcePathStyle: false,
+    spaceSecretAccessKey: process.env.DO_SPACE_SECRET_ACCESS_KEY,
+    spaceAccessKeyName: process.env.DO_SPACE_ACCESS_KEY_NAME,
   },
   frontend: {
     url: process.env.FRONTEND_URL || 'http://localhost:9000',

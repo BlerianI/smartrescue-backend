@@ -31,11 +31,13 @@ export const verifyRefreshToken = (token) => {
 };
 
 export const setAuthCookies = (res, accessToken, refreshToken) => {
+
   res.cookie(config.cookies.accessTokenName, accessToken, {
     httpOnly: config.cookies.httpOnly,
     secure: config.cookies.secure,
     sameSite: config.cookies.sameSite,
     maxAge: config.cookies.maxAge.access,
+    path: '/',
   });
 
   res.cookie(config.cookies.refreshTokenName, refreshToken, {
@@ -43,9 +45,11 @@ export const setAuthCookies = (res, accessToken, refreshToken) => {
     secure: config.cookies.secure,
     sameSite: config.cookies.sameSite,
     maxAge: config.cookies.maxAge.refresh,
+    path: '/',
   });
 };
 
+// Cookies löschen beim Logout
 export const clearAuthCookies = (res) => {
   res.clearCookie(config.cookies.accessTokenName);
   res.clearCookie(config.cookies.refreshTokenName);

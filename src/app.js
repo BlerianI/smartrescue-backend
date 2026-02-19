@@ -19,9 +19,13 @@ if (config.api.env === 'development') {
   app.use(morgan('dev'));
 }
 
+app.set('trust proxy', 1);
+app.use(cookieParser());
+
 const allowedOrigins = [
   'https://192.168.0.31:9000',
   'https://localhost:9000',
+  'http://localhost:9000',
   'https://172.16.137.220:9000',
   'https://172.20.10.2:9000/',
   process.env.FRONTEND_URL,
@@ -35,19 +39,16 @@ app.use(
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        console.log('❌ CORS blockiert für:', origin);
         callback(new Error('Not allowed by CORS'));
       }
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Set-Cookie'],
   }),
 );
 
-app.set('trust proxy', 1);
-
-app.use(cookieParser());
 app.use(express.static(path.join(dirname, '/public')));
 app.use(express.json());
 
