@@ -1,10 +1,15 @@
 import * as model from '../../models/userModel.js';
 import asyncHandler from 'express-async-handler';
+<<<<<<< HEAD
+=======
+import { uploadProfilePicture } from '../../bucket/storageService.js';
+>>>>>>> develop
 
 export const getTest = asyncHandler(async (req, res) => {
   res.status(200).json(await model.getTest());
 });
 
+<<<<<<< HEAD
 export const getProfilesFromUser = asyncHandler(async (req, res) => {
   try {
     const user_id = req.params.id;
@@ -463,3 +468,23 @@ export const updateDocuments = asyncHandler(async (req, res) => {
 });
 
 // #endregion
+=======
+export const uploadAvatar = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({
+      success: false,
+      message: 'Keine Datei hochgeladen',
+    });
+  }
+
+  const userId = req.body.userId;
+
+  const imageUrl = await uploadProfilePicture(req.file.buffer, req.file.originalname, userId);
+
+  res.status(200).json({
+    success: true,
+    message: 'Profilbild erfolgreich hochgeladen',
+    data: { imageUrl },
+  });
+});
+>>>>>>> develop

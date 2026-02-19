@@ -1,4 +1,5 @@
 GET http://localhost:3000/api/v1/user/
+<<<<<<< HEAD
 ###
 POST http://localhost:3000/api/v1/auth/signup
 Content-Type: application/json
@@ -33,3 +34,5 @@ Authorization: Bearer YOUR_TOKEN_HERE
 
 ### OAuth Error Route
 GET http://localhost:3000/api/v1/auth/error
+=======
+>>>>>>> develop

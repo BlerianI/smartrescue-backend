@@ -55,7 +55,18 @@ export const googleCallback = asyncHandler(async (req, res) => {
 
   setAuthCookies(res, result.accessToken, result.refreshToken);
 
-  res.redirect(`${config.frontend.url}/profile`);
+  res.send(`
+    <html>
+      <body>
+        <h2>Login erfolgreich!</h2>
+        <script>
+          setTimeout(() => {
+            window.location.href = '${config.frontend.url}/profile';
+          }, 500);
+        </script>
+      </body>
+    </html>
+  `);
 });
 
 export const logout = asyncHandler(async (req, res) => {

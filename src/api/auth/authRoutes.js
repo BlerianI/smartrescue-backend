@@ -13,6 +13,7 @@ import { authenticateToken } from '../../middleware/authMiddleware.js';
 const router = express.Router();
 
 router.post('/signup', signUp);
+
 router.post('/signin', signIn);
 
 router.post('/refresh', refreshToken);

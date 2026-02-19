@@ -3,6 +3,7 @@ import config from '../config.js';
 import prisma from '../prisma.js';
 import { verifyAccessToken } from '../utils/tokenUtils.js';
 
+// Token aus Cookie lesen und verifizieren
 export const authenticateToken = async (req, res, next) => {
   const token = req.cookies[config.cookies.accessTokenName];
 

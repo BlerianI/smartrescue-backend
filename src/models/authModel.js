@@ -39,12 +39,14 @@ export const createUser = async ({ lastName, firstName, email, password }) => {
       first_name: user.first_name,
       role: user.role,
       is_active: user.is_active,
+      avatar_url: user.avatar_url,
     },
     accessToken,
     refreshToken,
   };
 };
 
+// User login (JWT)
 export const loginUser = async ({ email, password }) => {
   const user = await prisma.users.findUnique({
     where: { email },
@@ -80,6 +82,7 @@ export const loginUser = async ({ email, password }) => {
       last_name: user.last_name,
       first_name: user.first_name,
       is_active: user.is_active,
+      avatar_url: user.avatar_url,
     },
     accessToken,
     refreshToken,
@@ -133,3 +136,4 @@ export const refreshUserToken = async (userId) => {
     refreshToken,
   };
 };
+
