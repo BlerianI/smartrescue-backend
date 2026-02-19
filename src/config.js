@@ -20,8 +20,8 @@ const config = {
     accessTokenName: 'accessToken',
     refreshTokenName: 'refreshToken',
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    secure: true,
+    sameSite: 'none',
     domain: undefined,
     maxAge: {
       access: 15 * 60 * 1000,
@@ -45,7 +45,7 @@ const config = {
     spaceAccessKeyName: process.env.DO_SPACE_ACCESS_KEY_NAME,
   },
   frontend: {
-    url: process.env.FRONTEND_URL || 'http://localhost:9000',
+    url: process.env.FRONTEND_URL || 'http://localhost:9200',
   },
 };
 
