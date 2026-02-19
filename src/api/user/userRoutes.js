@@ -24,28 +24,6 @@ import {
   getProfileDetails,
 } from './userController.js';
 
-import {
-  getProfilesFromUser,
-  insertProfile,
-  insertDoctor,
-  insertEmergencyContact,
-  insertMedData,
-  insertMedications,
-  insertMedConditions,
-  insertAllergies,
-  insertDocuments,
-  deleteProfileFromUser,
-  getProfilePdf,
-  updateProfile,
-  updateDoctor,
-  updateEmergencyContact,
-  updateMedData,
-  updateMedications,
-  updateMedConditions,
-  updateAllergies,
-  updateDocuments,
-  getProfileDetails,
-} from './userController.js';
 
 const router = express.Router();
 
