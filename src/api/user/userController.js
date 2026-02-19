@@ -464,6 +464,7 @@ export const updateDocuments = asyncHandler(async (req, res) => {
   }
 });
 
+
 // #endregion
 export const uploadAvatar = asyncHandler(async (req, res) => {
   if (!req.file) {
