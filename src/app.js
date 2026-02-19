@@ -29,6 +29,7 @@ const allowedOrigins = [
   'https://localhost:9000',
   'http://localhost:9000',
   'http://localhost:9200',
+  'https://localhost:9200',
   'https://172.16.137.220:9000',
   'https://172.20.10.2:9000/',
   process.env.FRONTEND_URL,
