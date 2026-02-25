@@ -31,7 +31,8 @@ const allowedOrigins = [
   'http://localhost:9200',
   'https://localhost:9200',
   'https://172.16.137.220:9000',
-  'https://172.20.10.2:9000/',
+  'https://172.20.10.2:9000',
+  'https://smartrescue-4zl8q.ondigitalocean.app',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
@@ -43,7 +44,7 @@ app.use(
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(null, false);
       }
     },
     credentials: true,
