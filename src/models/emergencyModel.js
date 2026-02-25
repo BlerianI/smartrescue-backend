@@ -1,7 +1,7 @@
 import prisma from '../prisma.js';
 
 export const getPersonInformation = async (external_id) => {
-  const rows = await prisma.$queryRaw`SELECT json_build_object(
+    const rows = await prisma.$queryRaw`SELECT json_build_object(
     'profile', json_build_object(
         'name', CONCAT(p.first_name, ' ', p.last_name),
         'birthdate', to_char(p.birthdate::date, 'DD/MM/YYYY'),
@@ -10,6 +10,7 @@ export const getPersonInformation = async (external_id) => {
         'weight', p.weight::int,
         'height', p.height::int,
         'gender', p.gender,
+        'avatar_url', p.avatar_url,
         'address', CONCAT(
             p.street, ' ', p.house_number, ', ',
             p.postal_code, ' ', p.city, ', Österreich'
@@ -92,5 +93,5 @@ export const getPersonInformation = async (external_id) => {
 AS personInfo
 FROM profiles p
 WHERE p.external_id = CAST(${external_id} AS uuid);`;
-  return rows;
+    return rows;
 };
