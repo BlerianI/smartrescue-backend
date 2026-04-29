@@ -1,4 +1,5 @@
 import prisma from '../prisma.js';
+import { randomUUID } from 'crypto';
 
 export const getPersonInformation = async (external_id) => {
     const rows = await prisma.$queryRaw`SELECT json_build_object(
@@ -94,4 +95,27 @@ AS personInfo
 FROM profiles p
 WHERE p.external_id = CAST(${external_id} AS uuid);`;
     return rows;
+};
+
+export const logAccess = async (external_id, location) => {
+    const profile = await prisma.profiles.findUnique({
+        where: { external_id },
+        select: { profile_id: true, last_name: true },
+    });
+
+    if (!profile) return null;
+
+    const log = await prisma.access_logs.create({
+        data: {
+            access_id: randomUUID(),
+            access_location: location || 'unknown',
+            profile_id: profile.profile_id,
+        },
+    });
+
+    return {
+        access_location: log.access_location,
+        access_time: log.access_time,
+        last_name: profile.last_name,
+    };
 };
