@@ -66,6 +66,14 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.use('/api/v1/admin', adminRoute);
+app.use('/api/v1/test', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Backend ist online!',
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV
+  });
+});
 app.use('/api/v1/emergency', emergencyRoute);
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/auth', authRoute);
