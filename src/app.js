@@ -27,12 +27,18 @@ const allowedOrigins = [
   'https://192.168.0.31:9000',
   'https://192.168.0.31:9200',
   'https://localhost:9000',
+  'https://localhost:9001',
   'http://localhost:9000',
+  'http://localhost:9001',
   'http://localhost:9200',
   'https://localhost:9200',
   'https://172.16.137.220:9000',
   'https://172.20.10.2:9000',
   'https://smartrescue-4zl8q.ondigitalocean.app',
+  'https://sm-api.dev',
+  'https://card.sm-api.dev',
+  'http://64.226.117.100:8080',
+  'http://64.226.117.100:8081',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 

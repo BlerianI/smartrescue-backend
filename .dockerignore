@@ -3,5 +3,4 @@ node_modules
 Dockerfile
 .dockerignore
 docker-compose*.yml
-# verhinderung, dass das git-repo ins image gelangt 
 .git

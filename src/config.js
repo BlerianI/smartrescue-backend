@@ -37,7 +37,7 @@ const config = {
     },
   },
   spaceBucket: {
-    spaceEndpoint: process.env.DO_SPACE_ENPOINT,
+    spaceEndpoint: process.env.DO_SPACE_ENDPOINT,
     spaceRegion: process.env.DO_SPACE_REGION,
     spaceAccessKeyId: process.env.DO_SPACE_ACCESS_KEY_ID,
     forcePathStyle: false,
